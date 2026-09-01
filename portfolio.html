@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanjay Periyasamy M — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fdfcfa;
+    --ink:#16181d;
+    --ink-soft:#565a63;
+    --ink-faint:#8a8d94;
+    --accent:#243a63;
+    --accent-warm:#a9791f;
+    --line:#e3e0d9;
+    --card:#ffffff;
+    --maxw:760px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent-warm);color:#fff;}
+  a{color:inherit;}
+  h1,h2,h3{
+    font-family:'Source Serif 4', serif;
+    font-weight:500;
+    margin:0;
+  }
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- nav ---------- */
+  nav{
+    padding:28px 0;
+  }
+  nav .wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+  }
+  .mark{
+    font-family:'Source Serif 4', serif;
+    font-size:18px;
+    letter-spacing:0.02em;
+  }
+  nav ul{
+    list-style:none;
+    display:flex;
+    gap:26px;
+    margin:0;
+    padding:0;
+  }
+  nav a{
+    text-decoration:none;
+    color:var(--ink-soft);
+    font-size:14.5px;
+    transition:color .2s ease;
+  }
+  nav a:hover, nav a:focus-visible{color:var(--ink);}
+
+  /* ---------- sprocket divider (signature motif) ---------- */
+  .sprocket{
+    width:100%;
+    height:14px;
+    display:block;
+    overflow:hidden;
+  }
+  .sprocket svg{display:block;width:100%;height:100%;}
+  .sprocket.hero-sprocket{height:22px;margin:8px 0 34px;}
+  .sprocket rect{fill:var(--line);}
+  .sprocket.hero-sprocket rect{
+    fill:var(--accent);
+    opacity:0;
+    animation:tick .5s ease forwards;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .sprocket.hero-sprocket rect{animation:none;opacity:1;}
+  }
+  @keyframes tick{ to{opacity:1;} }
+
+  /* ---------- hero 3D scene: two intersecting wireframe forms — ---------- */
+  /* the angular one is code, the organic one is story. neither dominates. */
+  .hero-3d{
+    position:relative;
+    width:100%;
+    aspect-ratio:1/1;
+    max-width:360px;
+    margin:0 auto;
+    cursor:grab;
+  }
+  .hero-3d canvas{display:block;width:100% !important;height:100% !important;}
+  .hero-3d-label{
+    position:absolute;
+    bottom:-26px;
+    left:0;
+    right:0;
+    text-align:center;
+    font-size:12.5px;
+    color:var(--ink-faint);
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- hero ---------- */
+  header.hero{padding:24px 0 8px;}
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:36px;
+    align-items:center;
+  }
+  .eyebrow{
+    font-size:14.5px;
+    color:var(--accent-warm);
+    margin-bottom:14px;
+  }
+  h1.name{
+    font-size:44px;
+    line-height:1.15;
+    letter-spacing:-0.01em;
+  }
+  .role{
+    font-size:19px;
+    color:var(--ink-soft);
+    margin-top:14px;
+    max-width:520px;
+  }
+  .role strong{color:var(--ink); font-weight:500;}
+  .hero-links{
+    display:flex;
+    gap:22px;
+    margin-top:26px;
+    flex-wrap:wrap;
+  }
+  .hero-links a{
+    font-size:14.5px;
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    padding-bottom:2px;
+    transition:border-color .2s ease, color .2s ease;
+  }
+  .hero-links a:hover, .hero-links a:focus-visible{
+    border-color:var(--ink);
+  }
+  @media (min-width:860px){
+    :root{--maxw:940px;}
+    .hero-grid{grid-template-columns:1.2fr 0.8fr;gap:20px;}
+    .hero-3d{max-width:320px;}
+  }
+
+  /* ---------- section shell ---------- */
+  section{padding:64px 0;}
+  section + section{border-top:1px solid var(--line);}
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:34px;
+    gap:16px;
+  }
+  h2.section-title{
+    font-size:15px;
+    font-weight:500;
+    color:var(--ink-faint);
+    letter-spacing:0.03em;
+  }
+  .section-note{
+    font-size:14px;
+    color:var(--ink-faint);
+    text-align:right;
+    max-width:220px;
+  }
+  .section-head:has(.tabs){align-items:center;}
+  .tabs{
+    display:flex;
+    gap:4px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:3px;
+  }
+  .tab{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    background:transparent;
+    border:none;
+    border-radius:999px;
+    padding:7px 15px;
+    cursor:pointer;
+    transition:background .2s ease, color .2s ease;
+  }
+  .tab:hover{color:var(--ink);}
+  .tab.active{
+    background:var(--accent);
+    color:#fff;
+  }
+  .feature, .grid-item, .also-list li{
+    transition:opacity .35s ease, transform .35s ease;
+    transform-style:preserve-3d;
+    will-change:transform;
+  }
+  .grid-item{transition:opacity .35s ease, transform .12s ease, box-shadow .2s ease;}
+  .grid-item.tilt{box-shadow:0 18px 30px -20px rgba(20,25,40,0.25);}
+  .hide-cat{
+    opacity:0;
+    transform:translateY(4px);
+    height:0;
+    padding-top:0;
+    padding-bottom:0;
+    margin:0;
+    overflow:hidden;
+    border:none !important;
+  }
+  .reveal{
+    opacity:0;
+    transform:translateY(14px);
+  }
+  .reveal.in-view{
+    opacity:1;
+    transform:translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;}
+  }
+
+  /* ---------- about ---------- */
+  .about-body p{
+    max-width:640px;
+    color:var(--ink-soft);
+    margin:0 0 16px;
+  }
+  .about-body p:last-child{margin-bottom:0;}
+  .about-body strong{color:var(--ink); font-weight:500;}
+
+  /* ---------- featured work ---------- */
+  .feature{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:8px;
+    padding:28px 0;
+  }
+  .feature + .feature{border-top:1px solid var(--line);}
+  .feature-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:20px;
+  }
+  .feature-name{
+    font-size:24px;
+  }
+  .feature-tag{
+    font-size:13px;
+    color:var(--ink-faint);
+    white-space:nowrap;
+  }
+  .feature-desc{
+    color:var(--ink-soft);
+    max-width:600px;
+    margin-top:10px;
+  }
+  .stack{
+    margin-top:14px;
+    font-size:13.5px;
+    color:var(--accent);
+  }
+
+  /* ---------- grid work ---------- */
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .grid-item{
+    background:var(--card);
+    padding:26px;
+  }
+  .grid-item h3{
+    font-size:18px;
+    margin-bottom:8px;
+  }
+  .grid-item p{
+    color:var(--ink-soft);
+    font-size:15px;
+    margin:0 0 10px;
+  }
+  .grid-item .stack{margin-top:0;}
+
+  /* ---------- also built ---------- */
+  .also-list{
+    list-style:none;
+    margin:0;
+    padding:0;
+    border-top:1px solid var(--line);
+  }
+  .also-list li{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    padding:16px 0;
+    border-bottom:1px solid var(--line);
+    gap:16px;
+  }
+  .also-list .also-name{font-size:16px;}
+  .also-list .also-desc{
+    color:var(--ink-faint);
+    font-size:14px;
+    text-align:right;
+    max-width:340px;
+  }
+
+  /* ---------- skills ---------- */
+  .skills-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 10px;
+    margin-bottom:22px;
+  }
+  .skills-row:last-child{margin-bottom:0;}
+  .skills-label{
+    font-size:13.5px;
+    color:var(--ink-faint);
+    width:100%;
+    margin-bottom:8px;
+  }
+  .skill-item{
+    font-size:15px;
+    color:var(--ink-soft);
+  }
+  .skill-item:not(:last-child)::after{
+    content:"·";
+    margin-left:12px;
+    color:var(--line);
+  }
+
+  /* ---------- contact ---------- */
+  .contact h2.big{
+    font-size:32px;
+    max-width:480px;
+    line-height:1.3;
+  }
+  .contact-links{
+    margin-top:28px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .contact-links a{
+    text-decoration:none;
+    font-size:17px;
+    width:fit-content;
+    border-bottom:1px solid transparent;
+    transition:border-color .2s ease;
+  }
+  .contact-links a:hover, .contact-links a:focus-visible{
+    border-color:var(--ink);
+  }
+  footer{
+    padding:32px 0 60px;
+    color:var(--ink-faint);
+    font-size:13.5px;
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+  }
+
+  @media (max-width:640px){
+    h1.name{font-size:34px;}
+    .grid{grid-template-columns:1fr;}
+    .section-head{flex-direction:column;align-items:flex-start;}
+    .section-head:has(.tabs){align-items:flex-start;}
+    .section-note{text-align:left;}
+    .also-list li{flex-direction:column;align-items:flex-start;gap:4px;}
+    .also-list .also-desc{text-align:left;max-width:none;}
+    .contact h2.big{font-size:26px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="mark">Sanjay Periyasamy M</div>
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="eyebrow">Madurai, Tamil Nadu</div>
+        <h1 class="name">I build software —<br>and sometimes, stories.</h1>
+        <p class="role">Artificial Intelligence student and full-stack developer. <strong>I spend my weeks shipping working products</strong> — booking systems, dashboards, ordering platforms — and my evenings thinking about how AI can help Tamil cinema writers tell better stories.</p>
+        <div class="hero-links">
+          <a href="#work">See the work</a>
+          <a href="mailto:sanjay.naasai@gmail.com">Email me</a>
+          <a href="https://github.com/sanjayperiyasamy-hub" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/sanjay-periyasamy-m-214839323" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <div class="hero-3d" id="hero3d">
+        <span class="hero-3d-label">code &amp; story, orbiting</span>
+      </div>
+    </div>
+  </div>
+  <div class="sprocket hero-sprocket" aria-hidden="true">
+    <svg viewBox="0 0 400 22" preserveAspectRatio="none">
+      <!-- generated below -->
+    </svg>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">ABOUT</h2>
+    </div>
+    <div class="about-body">
+      <p>I'm currently studying AI and building most of my projects end to end — frontend, backend, and the database underneath. <strong>Most of what I build starts as a real problem someone actually has:</strong> a tuition center that needed attendance tracked properly, a hotel that wanted table-side ordering without an app, a friend's events business that needed a site that looked like the prices it was charging.</p>
+      <p>The thread that connects it: I like taking something messy — a workflow, a form, a folder of paper records — and turning it into something that just works. Lately that's extended into <strong>Kadhai AI Studio</strong>, a tool I'm building for Tamil film writers, because I think the same instinct applies to storytelling as it does to software.</p>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">SELECTED WORK</h2>
+      <div class="tabs" role="tablist" aria-label="Filter work by category">
+        <button class="tab active" role="tab" aria-selected="true" data-filter="all">All</button>
+        <button class="tab" role="tab" aria-selected="false" data-filter="tech">Tech</button>
+        <button class="tab" role="tab" aria-selected="false" data-filter="nontech">Non-tech</button>
+      </div>
+    </div>
+
+    <div class="feature reveal" data-cat="nontech">
+      <div class="feature-top">
+        <h3 class="feature-name">Kadhai AI Studio</h3>
+        <span class="feature-tag">2026 — in progress</span>
+      </div>
+      <p class="feature-desc">A web app for Tamil film industry creatives — story ideas, song lyrics, and character generation, all through the Claude API, with a Tamil/English toggle on every output. Includes a Script Vault that keeps version history so writers can trace how a draft evolved.</p>
+      <div class="stack">Claude API · Version tracking · Bilingual generation</div>
+    </div>
+
+    <div class="feature reveal" data-cat="tech">
+      <div class="feature-top">
+        <h3 class="feature-name">EliteInvite.co</h3>
+        <span class="feature-tag">2026 — in progress</span>
+      </div>
+      <p class="feature-desc">A digital invitation platform with cinematic entrances — think a wedding invite that feels like a film opening. React front end, Node backend, and an admin dashboard for tracking RSVPs and engagement.</p>
+      <div class="stack">React + Vite · Node.js · Three.js · GSAP · Framer Motion</div>
+    </div>
+
+    <div class="section-head" style="margin-top:56px;">
+      <h2 class="section-title">MORE BUILT & SHIPPED</h2>
+    </div>
+    <div class="grid">
+      <div class="grid-item reveal" data-cat="tech">
+        <h3>The Register</h3>
+        <p>Enrollment, homework, attendance, and fee management for a tuition center teaching grades 1–10.</p>
+        <div class="stack">Full-stack · Relational DB design</div>
+      </div>
+      <div class="grid-item reveal" data-cat="nontech">
+        <h3>V Vision Events</h3>
+        <p>A luxury single-page site for a digital invitation business — black, gold, and restraint.</p>
+        <div class="stack">HTML/CSS/JS · WhatsApp integration</div>
+      </div>
+    </div>
+
+    <ul class="also-list">
+      <li class="reveal" data-cat="tech">
+        <span class="also-name">CertForge</span>
+        <span class="also-desc">Multi-template certificate generator studio</span>
+      </li>
+      <li class="reveal" data-cat="tech">
+        <span class="also-name">E-Certificate Portal</span>
+        <span class="also-desc">Self-serve certificate generation with instant PDF download</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">HOW I BUILD</h2>
+    </div>
+    <div class="skills-row">
+      <div class="skills-label">Frontend</div>
+      <span class="skill-item">React</span><span class="skill-item">Vite</span><span class="skill-item">HTML/CSS/JS</span><span class="skill-item">Framer Motion</span>
+    </div>
+    <div class="skills-row">
+      <div class="skills-label">Backend & data</div>
+      <span class="skill-item">Node.js</span><span class="skill-item">Express</span><span class="skill-item">PostgreSQL</span><span class="skill-item">SQLite</span><span class="skill-item">Firebase</span>
+    </div>
+    <div class="skills-row">
+      <div class="skills-label">Currently exploring</div>
+      <span class="skill-item">AI/ML fundamentals</span><span class="skill-item">Claude API</span><span class="skill-item">Three.js</span>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <h2 class="big">Building something? I'd like to hear about it.</h2>
+    <div class="contact-links">
+      <a href="mailto:sanjay.naasai@gmail.com">sanjay.naasai@gmail.com</a>
+      <a href="tel:+916383872060">+91 63838 72060</a>
+      <a href="https://github.com/sanjayperiyasamy-hub" target="_blank" rel="noopener">github.com/sanjayperiyasamy-hub</a>
+      <a href="https://linkedin.com/in/sanjay-periyasamy-m-214839323" target="_blank" rel="noopener">linkedin.com/in/sanjay-periyasamy-m-214839323</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Sanjay Periyasamy M — Madurai, Tamil Nadu</div>
+</footer>
+
+<script>
+  // Build sprocket-hole dividers (signature motif) as evenly spaced ticks.
+  function buildSprocket(el, count, animated){
+    const svg = el.querySelector('svg');
+    const w = 400, h = svg.viewBox.baseVal.height || 14;
+    const gap = w / count;
+    const rectW = animated ? 5 : 3;
+    const rectH = animated ? h : Math.max(3, h*0.5);
+    let markup = '';
+    for(let i=0;i<count;i++){
+      const x = i*gap + (gap-rectW)/2;
+      const delay = animated ? (i*0.012).toFixed(3) : 0;
+      markup += `<rect x="${x.toFixed(1)}" y="${(h-rectH)/2}" width="${rectW}" height="${rectH}" rx="1" style="animation-delay:${delay}s"></rect>`;
+    }
+    svg.innerHTML = markup;
+  }
+  buildSprocket(document.querySelector('.hero-sprocket'), 46, true);
+
+  // Tech / Non-tech filter
+  const tabs = document.querySelectorAll('.tab');
+  const items = document.querySelectorAll('[data-cat]');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected','true');
+      const filter = tab.dataset.filter;
+      items.forEach(item => {
+        const show = filter === 'all' || item.dataset.cat === filter;
+        item.classList.toggle('hide-cat', !show);
+      });
+    });
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.15});
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in-view'));
+  }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+  // ---------- Hero 3D scene: two intersecting wireframes ----------
+  // the angular cube is "code", the faceted sphere is "story" — the same
+  // duality as the Tech / Non-tech split below, made physical.
+  (function initHero3D(){
+    const mount = document.getElementById('hero3d');
+    if(!mount || typeof THREE === 'undefined') return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+    camera.position.set(0, 0, 5.2);
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    mount.appendChild(renderer.domElement);
+
+    const group = new THREE.Group();
+    scene.add(group);
+
+    // "code" — angular, structured
+    const codeGeo = new THREE.BoxGeometry(1.7, 1.7, 1.7);
+    const codeMat = new THREE.MeshBasicMaterial({ color: 0x243a63, wireframe: true, transparent: true, opacity: 0.9 });
+    const codeMesh = new THREE.Mesh(codeGeo, codeMat);
+    group.add(codeMesh);
+
+    // "story" — organic, faceted
+    const storyGeo = new THREE.IcosahedronGeometry(1.35, 1);
+    const storyMat = new THREE.MeshBasicMaterial({ color: 0xa9791f, wireframe: true, transparent: true, opacity: 0.85 });
+    const storyMesh = new THREE.Mesh(storyGeo, storyMat);
+    storyMesh.rotation.set(0.3, 0.4, 0);
+    group.add(storyMesh);
+
+    // faint orbiting point — the sprocket motif, carried into 3D
+    const dotGeo = new THREE.SphereGeometry(0.045, 8, 8);
+    const dotMat = new THREE.MeshBasicMaterial({ color: 0xa9791f });
+    const dot = new THREE.Mesh(dotGeo, dotMat);
+    group.add(dot);
+
+    function size(){
+      const w = mount.clientWidth, h = mount.clientHeight;
+      renderer.setSize(w, h);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    size();
+    window.addEventListener('resize', size);
+
+    // gentle pointer parallax
+    let targetX = 0, targetY = 0;
+    mount.addEventListener('mousemove', (e) => {
+      const r = mount.getBoundingClientRect();
+      targetX = ((e.clientX - r.left) / r.width - 0.5) * 0.6;
+      targetY = ((e.clientY - r.top) / r.height - 0.5) * 0.6;
+    });
+    mount.addEventListener('mouseleave', () => { targetX = 0; targetY = 0; });
+
+    let t = 0;
+    function animate(){
+      requestAnimationFrame(animate);
+      if(!reduceMotion){
+        t += 0.006;
+        codeMesh.rotation.x += 0.0035;
+        codeMesh.rotation.y += 0.005;
+        storyMesh.rotation.x -= 0.0022;
+        storyMesh.rotation.y -= 0.004;
+        dot.position.set(Math.cos(t) * 1.9, Math.sin(t * 1.3) * 1.9, Math.sin(t) * 0.6);
+      }
+      group.rotation.y += (targetX - group.rotation.y) * 0.04;
+      group.rotation.x += (-targetY - group.rotation.x) * 0.04;
+      renderer.render(scene, camera);
+    }
+    animate();
+  })();
+
+  // ---------- subtle 3D tilt on project cards ----------
+  (function initTilt(){
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduceMotion) return;
+    document.querySelectorAll('.grid-item, .feature').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(600px) rotateX(${(-py * 4).toFixed(2)}deg) rotateY(${(px * 4).toFixed(2)}deg)`;
+        card.classList.add('tilt');
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+        card.classList.remove('tilt');
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
